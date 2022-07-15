@@ -2,7 +2,20 @@ nginx-ingress:
   controller:
     config:
       entries:
-        opentracing: "true"
+        opentracing: "True"
+        opentracing-tracer: "/usr/local/lib/libjaegertracing_plugin.so"
+        opentracing-tracer-config: |
+                {
+                    "service_name": "nginx-ingress",
+                    "propagation_format": "w3c",
+                    "sampler": {
+                        "type": "const",
+                        "param": 1
+                    },
+                    "reporter": {
+                        "localAgentHostPort": "jaeger-agent.monitoring.svc.cluster.local:6831"
+                    }
+                }
         jaeger-collector-host: jaeger.monitoring.svc.cluster.local
     appprotect: 
       enable: true
