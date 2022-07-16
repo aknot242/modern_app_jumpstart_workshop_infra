@@ -1,0 +1,4 @@
+logstash:
+  extraEnvs:
+    - name: TZ
+      value: America/Los_Angeles
