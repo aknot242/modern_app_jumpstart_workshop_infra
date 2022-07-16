@@ -1,5 +1,6 @@
 elasticsearch:
   antiAffinity: soft
+  minimumMasterNodes: 1
   extraEnvs:
     - name: TZ
       value: America/Los_Angeles
