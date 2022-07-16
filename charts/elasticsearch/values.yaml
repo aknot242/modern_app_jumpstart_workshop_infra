@@ -1,4 +1,5 @@
-logstash:
+elasticsearch:
+  antiAffinity: soft
   extraEnvs:
     - name: TZ
       value: America/Los_Angeles
