@@ -5,7 +5,7 @@ elasticsearch:
       value: America/Los_Angeles
   extraInitContainers:
     - name: init-data
-      image: python:3.11-rc-bullseye
+      image: buildpack-deps:bullseye
       command:
         - bash
         - -c
