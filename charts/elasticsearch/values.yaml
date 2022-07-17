@@ -12,8 +12,10 @@ elasticsearch:
         - |
           #!/bin/bash
           ES_URL=http://elasticsearch-master:9200
-          python3 -m pip install requests
           cd /tmp
+          curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+          python3 get-pip.py
+          python3 -m pip install requests
           git clone https://github.com/skenderidis/nap-dashboard.git
           cd nap-dashboard
           while [[ "$(curl -s -o /dev/null -w '%{http_code}\n' $ES_URL)" != "200" ]]; do sleep 1; done
