@@ -12,6 +12,7 @@ elasticsearch:
         - |
           #!/bin/bash
           ES_URL=http://elasticsearch-master-0:9200
+          cd /tmp
           git clone https://github.com/skenderidis/nap-dashboard.git
           cd nap-dashboard
           while [[ "$(curl -s -o /dev/null -w '%{http_code}\n' $ES_URL)" != "200" ]]; do sleep 1; done
