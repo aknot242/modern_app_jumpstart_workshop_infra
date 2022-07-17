@@ -5,9 +5,9 @@ elasticsearch:
       value: America/Los_Angeles
   extraInitContainers:
     - name: init-data
-      image: busybox
+      image: debian
       command:
-        - sh
+        - bash
         - -c
         - |
           #!/bin/bash
