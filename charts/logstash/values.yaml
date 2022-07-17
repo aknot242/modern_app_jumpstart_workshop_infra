@@ -12,16 +12,17 @@ logstash:
           #!/bin/bash
           ES_URL=http://elasticsearch-master.monitoring.svc.cluster.local:9200
           cd /tmp
-          python3 -m pip install requests
+          pip install --no-cache-dir requests
           git clone https://github.com/skenderidis/nap-dashboard.git
           cd nap-dashboard
+          echo "Waiting for Elasticsearch API to come up..."
           while [[ "$(curl -s -o /dev/null -w '%{http_code}\n' $ES_URL)" != "200" ]]; do sleep 1; done
           curl -X PUT "$ES_URL/signatures" -H 'Content-Type: application/json'
           curl -d "@elastic/signature-mapping.json" -X PUT "$ES_URL/signatures/_mapping" -H 'Content-Type: application/json'
           python3 signatures/upload-signatures.py signatures/signatures-report.json elasticsearch-master.monitoring.svc.cluster.local
           curl -d "@elastic/template-mapping.json" -H 'Content-Type: application/json' -X PUT "$ES_URL/_template/waf_template?include_type_name"
-          curl -d "@elastic/template-mapping.json" -H 'Content-Type: application/json' -X PUT "$ES_URL/_template/waf_template?include_type_name"
           curl -d "@elastic/enrich-policy.json" -H 'Content-Type: application/json' -X PUT "$ES_URL/_enrich/policy/signatures-policy"
+          curl -X POST "$ES_URL/_enrich/policy/signatures-policy/_execute"
           curl -d "@elastic/sig-lookup.json" -H 'Content-Type: application/json' -X PUT "$ES_URL/_ingest/pipeline/sig_lookup"
   logstashPipeline:
     logstash.conf: |
