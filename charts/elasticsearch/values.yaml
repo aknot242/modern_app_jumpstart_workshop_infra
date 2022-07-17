@@ -5,7 +5,7 @@ elasticsearch:
       value: America/Los_Angeles
   extraInitContainers:
     - name: init-data
-      image: buildpack-deps:bullseye
+      image: python:bullseye
       command:
         - bash
         - -c
@@ -13,8 +13,6 @@ elasticsearch:
           #!/bin/bash
           ES_URL=http://elasticsearch-master:9200
           cd /tmp
-          curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-          python3 get-pip.py
           python3 -m pip install requests
           git clone https://github.com/skenderidis/nap-dashboard.git
           cd nap-dashboard
