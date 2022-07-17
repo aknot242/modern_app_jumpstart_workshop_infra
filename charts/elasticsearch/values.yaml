@@ -5,13 +5,12 @@ elasticsearch:
       value: America/Los_Angeles
   extraInitContainers:
     - name: init-data
-      image: debian
+      image: ubuntu
       command:
         - bash
         - -c
         - |
           #!/bin/bash
-          echo "Hello from the postStart handler" > /usr/share/message
           ES_URL=http://elasticsearch-master-0:9200
           git clone https://github.com/skenderidis/nap-dashboard.git
           cd nap-dashboard
