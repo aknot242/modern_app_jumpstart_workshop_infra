@@ -8,8 +8,8 @@ logstash:
       env:
         - name: ES_URL
           value: http://elasticsearch-master.monitoring.svc.cluster.local:9200
-      imagePullSecrets:
-        - name: ghcr
+  imagePullSecrets:
+    - name: ghcr
   logstashPipeline:
     logstash.conf: |
       input {
