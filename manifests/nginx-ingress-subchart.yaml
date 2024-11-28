@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    path: charts/nginx-plus-ingress
+    path: charts/nginx-plus-ingress-official-private-registry
     repoURL: https://github.com/aknot242/modern_app_jumpstart_workshop_infra.git
     targetRevision: HEAD
   destination:
